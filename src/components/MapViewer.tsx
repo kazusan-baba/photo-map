@@ -1,4 +1,4 @@
-import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
+import {MapContainer, Marker, Popup, TileLayer, useMapEvents} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Leaflet from 'leaflet';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
@@ -16,6 +16,15 @@ const DefaultIcon = Leaflet.icon({
 Leaflet.Marker.prototype.options.icon = DefaultIcon;
 
 const MapViewer = () => {
+  const MapEvent = () => {
+    const map = useMapEvents({
+      click: (event) => {
+        console.log(event);
+      },
+    })
+    return null;
+  }
+  
   return (
     <div>
       <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={{ height: "50vh", width: "100%" }}>
@@ -28,6 +37,7 @@ const MapViewer = () => {
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
+        <MapEvent/>
       </MapContainer>
     </div>
   );
