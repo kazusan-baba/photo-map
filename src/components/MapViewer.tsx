@@ -2,7 +2,7 @@
 
 import {MapContainer, Marker, Popup, TileLayer, useMapEvents} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import Leaflet, {type LatLngLiteral} from 'leaflet';
+import Leaflet, {LatLng, type LatLngLiteral} from 'leaflet';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -18,11 +18,11 @@ const DefaultIcon = Leaflet.icon({
 Leaflet.Marker.prototype.options.icon = DefaultIcon;
 
 type MapViewer = {
-  location: LatLngLiteral,
+  location?: LatLngLiteral,
   onMapClick?: (point: LatLngLiteral) => void
 }
 
-const MapViewer = ({location, onMapClick = () => {}}: MapViewer) => {
+const MapViewer = ({location = new LatLng(35.68, 139.76), onMapClick = () => {}}: MapViewer) => {
   const MapEvent = () => {
     const map = useMapEvents({
       click: (event) => {
