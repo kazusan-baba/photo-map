@@ -49,44 +49,42 @@ const Edit = () => {
   
   return (
     <div>
-      <main>
-        <MapComponent location={location} onMapClick={onMapClick}/>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Controller
-            name="latitude"
-            control={control}
-            defaultValue={0}
-            render={({field}) => (
-              <TextField {...field} disabled={true} label={"緯度"}/>
-            )}
-          />
-          <Controller
-            name="longitude"
-            control={control}
-            defaultValue={0}
-            render={({field}) => (
-              <TextField {...field} disabled={true} label={"経度"}/>
-            )}
-          />
-          <Controller
-            name="description"
-            control={control}
-            defaultValue={""}
-            render={({field}) => (
-              <TextField {...field} placeholder={"説明"}/>
-            )}
-          />
-          <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            {
-              isDragActive ?
-                <p>Drop the files here ...</p> :
-                <p>画像を ドロップ または、 クリックして選択</p>
-            }
-          </div>
-          <Button type={"submit"}>追加</Button>
-        </form>
-      </main>
+			<MapComponent location={location} onMapClick={onMapClick}/>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<Controller
+					name="latitude"
+					control={control}
+					defaultValue={0}
+					render={({field}) => (
+						<TextField {...field} disabled={true} label={"緯度"}/>
+					)}
+				/>
+				<Controller
+					name="longitude"
+					control={control}
+					defaultValue={0}
+					render={({field}) => (
+						<TextField {...field} disabled={true} label={"経度"}/>
+					)}
+				/>
+				<Controller
+					name="description"
+					control={control}
+					defaultValue={""}
+					render={({field}) => (
+						<TextField {...field} placeholder={"説明"}/>
+					)}
+				/>
+				<div {...getRootProps()}>
+					<input {...getInputProps()} />
+					{
+						isDragActive ?
+							<p>Drop the files here ...</p> :
+							<p>画像を ドロップ または、 クリックして選択</p>
+					}
+				</div>
+				<Button type={"submit"}>追加</Button>
+			</form>
     </div>
   )
 }
