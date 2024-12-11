@@ -1,3 +1,5 @@
+'use client'
+
 import {MapContainer, Marker, Popup, TileLayer, useMapEvents} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import Leaflet, {type LatLngLiteral} from 'leaflet';
