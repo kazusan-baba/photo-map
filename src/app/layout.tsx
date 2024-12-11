@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter"
 import localFont from "next/font/local";
 import Link from "next/link";
 
@@ -21,14 +22,16 @@ export const metadata: Metadata = {
 const RootLayout = ({children}: Readonly<{children: React.ReactNode}>) => (
   <html lang="ja">
   <body className={`${geistSans.variable} ${geistMono.variable}`}>
-    <header>
-      <Link href={"/"}>
-        <h1>PhotoMap</h1>
-      </Link>
-    </header>
-    <main>
-      {children}
-    </main>
+    <AppRouterCacheProvider>
+      <header>
+        <Link href={"/"}>
+          <h1>PhotoMap</h1>
+        </Link>
+      </header>
+      <main>
+        {children}
+      </main>
+    </AppRouterCacheProvider>
   </body>
   </html>
 );
