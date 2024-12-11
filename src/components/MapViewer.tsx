@@ -22,7 +22,7 @@ type MapViewer = {
   onMapClick?: (point: LatLngLiteral) => void
 }
 
-const MapViewer = ({location, onMapClick}: MapViewer) => {
+const MapViewer = ({location, onMapClick = () => {}}: MapViewer) => {
   const MapEvent = () => {
     const map = useMapEvents({
       click: (event) => {
