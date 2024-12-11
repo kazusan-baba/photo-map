@@ -1,6 +1,6 @@
 import {MapContainer, Marker, Popup, TileLayer, useMapEvents} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import Leaflet from 'leaflet';
+import Leaflet, {type LatLngLiteral} from 'leaflet';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -15,11 +15,11 @@ const DefaultIcon = Leaflet.icon({
 });
 Leaflet.Marker.prototype.options.icon = DefaultIcon;
 
-const MapViewer = () => {
+const MapViewer = ({location, onMapClick}:{location: LatLngLiteral, onMapClick: (point: LatLngLiteral) => void}) => {
   const MapEvent = () => {
     const map = useMapEvents({
       click: (event) => {
-        console.log(event);
+        onMapClick(event.latlng);
       },
     })
     return null;
@@ -27,12 +27,12 @@ const MapViewer = () => {
   
   return (
     <div>
-      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={{ height: "50vh", width: "100%" }}>
+      <MapContainer center={location} zoom={13} style={{height: "50vh", width: "100%"}}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[51.505, -0.09]}>
+        <Marker position={location}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
