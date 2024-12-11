@@ -17,7 +17,12 @@ const DefaultIcon = Leaflet.icon({
 });
 Leaflet.Marker.prototype.options.icon = DefaultIcon;
 
-const MapViewer = ({location, onMapClick}:{location: LatLngLiteral, onMapClick: (point: LatLngLiteral) => void}) => {
+type MapViewer = {
+  location: LatLngLiteral,
+  onMapClick?: (point: LatLngLiteral) => void
+}
+
+const MapViewer = ({location, onMapClick = () => {}}: MapViewer) => {
   const MapEvent = () => {
     const map = useMapEvents({
       click: (event) => {
