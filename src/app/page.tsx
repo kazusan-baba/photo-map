@@ -2,7 +2,6 @@ import Link from "next/link";
 
 const Home = () => (
   <div>
-    <main>
       <h2>フォトスポット一覧</h2>
       <div>
         <Link href={"/articles/0"}>
@@ -20,7 +19,6 @@ const Home = () => (
           </div>
         </Link>
     </div>
-    </main>
   </div>
 );
-export default Home
+export default Home;
