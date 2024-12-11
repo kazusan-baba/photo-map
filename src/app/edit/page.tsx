@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import {useCallback, useMemo, useState} from "react";
 import {useDropzone} from "react-dropzone"
 import {Controller, useForm} from "react-hook-form";
+import {useSearchParams} from "next/navigation";
 
 type EditForm = {
   latitude: number;
@@ -15,6 +16,9 @@ type EditForm = {
 }
 
 const Edit = () => {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  
   const [location, setLocation] = useState<LatLngLiteral>(new LatLng(35.68, 139.76));
   const [spots, setSpots] = useState<EditForm[]>([]);
   const {control, handleSubmit, setValue} = useForm<EditForm>({});
