@@ -26,8 +26,10 @@ const RootLayout = ({children}: Readonly<{children: React.ReactNode}>) => (
         <h1>PhotoMap</h1>
       </Link>
     </header>
-    {children}
+    <main>
+      {children}
+    </main>
   </body>
   </html>
 );
-export default RootLayout
+export default RootLayout;
