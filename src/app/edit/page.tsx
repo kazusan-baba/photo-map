@@ -46,6 +46,14 @@ const Edit = () => {
 			<MapComponent location={location} onMapClick={onMapClick}/>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Controller
+					name="title"
+					control={control}
+					defaultValue={""}
+					render={({field}) => (
+						<TextField {...field} label={"タイトル"}/>
+					)}
+				/>
+				<Controller
 					name="latitude"
 					control={control}
 					defaultValue={0}
