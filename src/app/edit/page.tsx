@@ -16,8 +16,8 @@ const Edit = () => {
 	const getDefaultValues = (): Article | CreateArticle => {
 		const defaultValues: CreateArticle = {
 			title: "",
-			latitude: 0,
-			longitude: 0,
+			latitude: 35.68,
+			longitude: 139.76,
 			description: "",
 		};
 		if (id) {
@@ -26,7 +26,7 @@ const Edit = () => {
 		return defaultValues;
 	}
   
-  const [location, setLocation] = useState<LatLngLiteral>(new LatLng(35.68, 139.76));
+  const [location, setLocation] = useState<LatLngLiteral>(new LatLng(getDefaultValues().latitude, getDefaultValues().longitude));
   const [spots, setSpots] = useState<CreateArticle[]>([]);
   const {control, handleSubmit, setValue} = useForm<CreateArticle>({defaultValues: getDefaultValues()});
   
