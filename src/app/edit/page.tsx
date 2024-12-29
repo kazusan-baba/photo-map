@@ -32,7 +32,7 @@ const Edit = () => {
   };
   
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setValue("img", acceptedFiles[0]);
+    setValue("image", acceptedFiles);
   }, []);
   
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
