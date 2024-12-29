@@ -1,24 +1,10 @@
-import Link from "next/link";
+import ArticleCards from "@/app/ArticleCard";
 
 const Home = () => (
-  <div>
-      <h2>フォトスポット一覧</h2>
-      <div>
-        <Link href={"/article/0"}>
-          <h3>仮 タイトル</h3>
-          <div>
-            <img src={"/sample/download.jpg"} alt={"タイトルの写真"}/>
-            <p>詳細</p>
-          </div>
-        </Link>
-        <Link href={"/article/1"}>
-          <h3>仮 タイトル</h3>
-          <div>
-            <img src={"/sample/download.jpg"} alt={"タイトルの写真"}/>
-            <p>詳細</p>
-          </div>
-        </Link>
-    </div>
-  </div>
+	<div>
+		<h2>フォトスポット一覧</h2>
+		<ArticleCards />
+	</div>
 );
+
 export default Home;
