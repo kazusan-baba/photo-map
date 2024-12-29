@@ -7,15 +7,28 @@ import {useCallback, useMemo, useState} from "react";
 import {useDropzone} from "react-dropzone"
 import {Controller, useForm} from "react-hook-form";
 import {useSearchParams} from "next/navigation";
-import type {CreateArticle} from "@/components/Article";
+import {type Article, type CreateArticle, TEST_DATA} from "@/components/Article";
 
 const Edit = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
+	
+	const getDefaultValues = (): Article | CreateArticle => {
+		const defaultValues: CreateArticle = {
+			title: "",
+			latitude: 0,
+			longitude: 0,
+			description: "",
+		};
+		if (id) {
+			return TEST_DATA.find(value => value.id === Number.parseInt(id)) ?? defaultValues;
+		}
+		return defaultValues;
+	}
   
   const [location, setLocation] = useState<LatLngLiteral>(new LatLng(35.68, 139.76));
   const [spots, setSpots] = useState<CreateArticle[]>([]);
-  const {control, handleSubmit, setValue} = useForm<CreateArticle>({});
+  const {control, handleSubmit, setValue} = useForm<CreateArticle>({defaultValues: getDefaultValues()});
   
   const MapComponent = useMemo(
     () => dynamic(() => import("@/components/MapViewer"), {
@@ -48,7 +61,6 @@ const Edit = () => {
 				<Controller
 					name="title"
 					control={control}
-					defaultValue={""}
 					render={({field}) => (
 						<TextField {...field} label={"タイトル"}/>
 					)}
@@ -56,7 +68,6 @@ const Edit = () => {
 				<Controller
 					name="latitude"
 					control={control}
-					defaultValue={0}
 					render={({field}) => (
 						<TextField {...field} disabled={true} label={"緯度"}/>
 					)}
@@ -64,7 +75,6 @@ const Edit = () => {
 				<Controller
 					name="longitude"
 					control={control}
-					defaultValue={0}
 					render={({field}) => (
 						<TextField {...field} disabled={true} label={"経度"}/>
 					)}
@@ -72,7 +82,6 @@ const Edit = () => {
 				<Controller
 					name="description"
 					control={control}
-					defaultValue={""}
 					render={({field}) => (
 						<TextField {...field} placeholder={"説明"}/>
 					)}
