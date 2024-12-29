@@ -16,8 +16,8 @@ const TEST_DATA: Article[] = [
     id: 0,
     title: "中央大橋",
     thumbnail: "/sample/download.jpg",
-    latitude: 35.68,
-    longitude: 139.76,
+    latitude: 35.67164174274727,
+    longitude: 139.78442788124087,
     description: "中央区佃にあるよ",
   },
   {
@@ -25,8 +25,8 @@ const TEST_DATA: Article[] = [
     title: "中央大橋",
     thumbnail: "/sample/download.jpg",
     description: "中央区新川にあるよ",
-    latitude: 35.68,
-    longitude: 139.76,
+    latitude: 35.67164174274727,
+    longitude: 139.78442788124087,
   },
 ];
 
