@@ -7,21 +7,15 @@ import {useCallback, useMemo, useState} from "react";
 import {useDropzone} from "react-dropzone"
 import {Controller, useForm} from "react-hook-form";
 import {useSearchParams} from "next/navigation";
-
-type EditForm = {
-  latitude: number;
-  longitude: number;
-  img: File;
-  description: string;
-}
+import type {CreateArticle} from "@/components/Article";
 
 const Edit = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   
   const [location, setLocation] = useState<LatLngLiteral>(new LatLng(35.68, 139.76));
-  const [spots, setSpots] = useState<EditForm[]>([]);
-  const {control, handleSubmit, setValue} = useForm<EditForm>({});
+  const [spots, setSpots] = useState<CreateArticle[]>([]);
+  const {control, handleSubmit, setValue} = useForm<CreateArticle>({});
   
   const MapComponent = useMemo(
     () => dynamic(() => import("@/components/MapViewer"), {
@@ -43,7 +37,7 @@ const Edit = () => {
   
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
   
-  const onSubmit = (data: EditForm) => {
+  const onSubmit = (data: CreateArticle) => {
     setSpots([...spots, data]);
   };
   
