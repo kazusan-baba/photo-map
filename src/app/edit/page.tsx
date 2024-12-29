@@ -61,7 +61,6 @@ const Edit = () => {
 				<Controller
 					name="title"
 					control={control}
-					defaultValue={""}
 					render={({field}) => (
 						<TextField {...field} label={"タイトル"}/>
 					)}
@@ -69,7 +68,6 @@ const Edit = () => {
 				<Controller
 					name="latitude"
 					control={control}
-					defaultValue={0}
 					render={({field}) => (
 						<TextField {...field} disabled={true} label={"緯度"}/>
 					)}
@@ -77,7 +75,6 @@ const Edit = () => {
 				<Controller
 					name="longitude"
 					control={control}
-					defaultValue={0}
 					render={({field}) => (
 						<TextField {...field} disabled={true} label={"経度"}/>
 					)}
@@ -85,7 +82,6 @@ const Edit = () => {
 				<Controller
 					name="description"
 					control={control}
-					defaultValue={""}
 					render={({field}) => (
 						<TextField {...field} placeholder={"説明"}/>
 					)}
