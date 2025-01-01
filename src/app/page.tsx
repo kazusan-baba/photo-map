@@ -1,10 +1,12 @@
 import ArticleCards from "@/app/ArticleCard";
+import { Box, Divider, Typography } from "@mui/material";
 
 const Home = () => (
-	<div>
-		<h2>フォトスポット一覧</h2>
+	<Box sx={{ p: 2 }}>
+		<Typography variant={"subtitle1"}>フォトスポット一覧</Typography>
+		<Divider sx={{ my: 2 }} />
 		<ArticleCards />
-	</div>
+	</Box>
 );
 
 export default Home;
