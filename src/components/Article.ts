@@ -2,7 +2,7 @@ type CreateArticle = {
   title: string,
   latitude: number;
   longitude: number;
-  image?: string[];
+  image: string[];
   description: string;
 }
 
