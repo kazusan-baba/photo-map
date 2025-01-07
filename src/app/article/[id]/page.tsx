@@ -18,7 +18,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 				{isAuthor && (<MuiLink component={Link} href={`/edit?id=${id}`} underline={"hover"}>編集</MuiLink>)}
 			</Box>
 			<Box sx={{display: "flex", justifyContent: "center", background: "#020202"}}>
-				<img src={article.image[0]} alt={""} style={{width: "75%"}}/>
+				<img src={article.images[0]} alt={""} style={{width: "75%"}}/>
 			</Box>
 			<Divider sx={{my: 2}}/>
 			<Box sx={{display: "flex", flexWrap: "wrap", justifyContent: "space-between"}}>
