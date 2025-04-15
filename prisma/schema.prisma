@@ -12,3 +12,24 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model article {
+  id             Int             @id @default(autoincrement())
+  title          String
+  thumbnail      String
+  latitude       Float
+  longitude      Float
+  description    String
+  created_at     DateTime        @default(now())
+  updated_at     DateTime        @updatedAt
+  article_images article_image[]
+}
+
+model article_image {
+  id         Int      @id @default(autoincrement())
+  article    article  @relation(fields: [article_id], references: [id])
+  article_id Int
+  image_path String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
