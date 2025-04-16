@@ -8,6 +8,7 @@ import {useDropzone} from "react-dropzone"
 import {Controller, useForm} from "react-hook-form";
 import {useSearchParams} from "next/navigation";
 import type {Article, ArticleSubmit, CreateArticleData} from "@/components/Article";
+import {Insert, Update} from "@/components/formaction";
 import {prisma} from "@/components/prisma";
 
 const Edit = () => {
@@ -55,7 +56,12 @@ const Edit = () => {
   
   const onSubmit = (data: ArticleSubmit) => {
     setSpots([...spots, data]);
-  };
+		if (id) {
+			Update(data, Number.parseInt(id));
+		} else {
+			Insert(data);
+		}
+	};
   
   return (
     <div>
