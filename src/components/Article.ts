@@ -1,12 +1,15 @@
-export type CreateArticle = {
+export type CreateArticleData = {
   title: string,
   latitude: number;
   longitude: number;
-  images: string[];
   description: string;
 }
 
-export type Article = CreateArticle & {
+export type ArticleSubmit = CreateArticleData & {
+  images: string[];
+};
+
+export type Article = ArticleSubmit & {
   id: number;
   thumbnail: string;
 };

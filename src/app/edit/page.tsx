@@ -7,15 +7,15 @@ import {useCallback, useMemo, useState} from "react";
 import {useDropzone} from "react-dropzone"
 import {Controller, useForm} from "react-hook-form";
 import {useSearchParams} from "next/navigation";
-import {type Article, type CreateArticle, TEST_DATA} from "@/components/Article";
+import type {Article, ArticleSubmit, CreateArticleData} from "@/components/Article";
 import {prisma} from "@/components/prisma";
 
 const Edit = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
 	
-	const getDefaultValues = (): Article | CreateArticle => {
-		const defaultValues: CreateArticle = {
+	const getDefaultValues = (): CreateArticleData | Article => {
+		const defaultValues: CreateArticleData = {
 			title: "",
 			latitude: 35.68,
 			longitude: 139.76,
@@ -30,8 +30,8 @@ const Edit = () => {
 	}
   
   const [location, setLocation] = useState<LatLngLiteral>(new LatLng(getDefaultValues().latitude, getDefaultValues().longitude));
-  const [spots, setSpots] = useState<CreateArticle[]>([]);
-  const {control, handleSubmit, setValue} = useForm<CreateArticle>({defaultValues: getDefaultValues()});
+  const [spots, setSpots] = useState<CreateArticleData[]>([]);
+  const {control, handleSubmit, setValue} = useForm<ArticleSubmit >({defaultValues: getDefaultValues()});
   
   const MapComponent = useMemo(
     () => dynamic(() => import("@/components/MapViewer"), {
@@ -48,12 +48,12 @@ const Edit = () => {
   };
   
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setValue("image", acceptedFiles);
+    setValue("images", acceptedFiles.map(value => value.name));
   }, []);
   
   const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
   
-  const onSubmit = (data: CreateArticle) => {
+  const onSubmit = (data: ArticleSubmit) => {
     setSpots([...spots, data]);
   };
   
