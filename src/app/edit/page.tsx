@@ -8,6 +8,7 @@ import {useDropzone} from "react-dropzone"
 import {Controller, useForm} from "react-hook-form";
 import {useSearchParams} from "next/navigation";
 import {type Article, type CreateArticle, TEST_DATA} from "@/components/Article";
+import {prisma} from "@/components/prisma";
 
 const Edit = () => {
   const searchParams = useSearchParams();
@@ -20,9 +21,11 @@ const Edit = () => {
 			longitude: 139.76,
 			description: "",
 		};
-		if (id) {
-			return TEST_DATA.find(value => value.id === Number.parseInt(id)) ?? defaultValues;
-		}
+		// if (id) {
+		// 	let articleData: CreateArticleData | null = null;
+		// 	prisma.article.findUnique({where: {id: Number.parseInt(id)}}).then(value => {articleData = value})
+		// 	return  articleData ?? defaultValues;
+		// }
 		return defaultValues;
 	}
   
