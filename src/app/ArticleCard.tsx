@@ -1,11 +1,13 @@
-import { type Article, TEST_DATA } from "@/components/Article";
-import { Box, Divider, Link as MuiLink, Typography } from "@mui/material";
+import {prisma} from "@/components/prisma";
+import {Box, Divider, Link as MuiLink, Typography} from "@mui/material";
 import Link from "next/link";
 
-const ArticleCards = () => {
+const ArticleCards = async () => {
+	const article = await prisma.article.findMany();
+	
 	return (
 		<>
-			{TEST_DATA.map((item) => (
+			{article.map((item) => (
 				<ArticleCard key={item.id} data={item} />
 			))}
 		</>
@@ -13,7 +15,12 @@ const ArticleCards = () => {
 };
 
 type ArticleCardProps = {
-	data: Article;
+	data: {
+		id: number
+		title: string
+		thumbnail: string
+		description: string
+	};
 };
 
 const ArticleCard = ({ data }: ArticleCardProps) => {
@@ -27,7 +34,7 @@ const ArticleCard = ({ data }: ArticleCardProps) => {
 			<Divider variant={"middle"} />
 			<Box sx={{ p: 1, display: "flex", flexWrap: "wrap" }}>
 				<Link href={`/article/${data.id}`}>
-					<img src={data.thumbnail} alt={"タイトルの写真"} />
+					<img src={`/sample/${data.thumbnail}`} alt={"タイトルの写真"} />
 				</Link>
 				<Typography variant={"body1"} sx={{ p: 1 }}>
 					{data.description}
