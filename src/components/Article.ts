@@ -1,4 +1,4 @@
-type CreateArticle = {
+export type CreateArticle = {
   title: string,
   latitude: number;
   longitude: number;
@@ -6,7 +6,7 @@ type CreateArticle = {
   description: string;
 }
 
-type Article = CreateArticle & {
+export type Article = CreateArticle & {
   id: number;
   thumbnail: string;
 };
@@ -31,5 +31,3 @@ const TEST_DATA: Article[] = [
     description: "中央区新川にあるよ",
   },
 ];
-
-export { TEST_DATA, type Article, type CreateArticle };
