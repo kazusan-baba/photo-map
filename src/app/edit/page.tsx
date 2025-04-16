@@ -1,6 +1,6 @@
 'use client';
 
-import {Button, TextField} from "@mui/material";
+import {Box, Button, TextField} from "@mui/material";
 import {LatLng, type LatLngLiteral} from "leaflet";
 import dynamic from "next/dynamic";
 import {useCallback, useMemo, useState} from "react";
@@ -32,7 +32,7 @@ const Edit = () => {
   
   const [location, setLocation] = useState<LatLngLiteral>(new LatLng(getDefaultValues().latitude, getDefaultValues().longitude));
   const [spots, setSpots] = useState<CreateArticleData[]>([]);
-  const {control, handleSubmit, setValue} = useForm<ArticleSubmit >({defaultValues: getDefaultValues()});
+  const {control, handleSubmit, setValue, getValues} = useForm<ArticleSubmit >({defaultValues: getDefaultValues()});
   
   const MapComponent = useMemo(
     () => dynamic(() => import("@/components/MapViewer"), {
@@ -64,49 +64,52 @@ const Edit = () => {
 	};
   
   return (
-    <div>
+    <Box>
 			<MapComponent location={location} onMapClick={onMapClick}/>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<Controller
-					name="title"
-					control={control}
-					render={({field}) => (
-						<TextField {...field} label={"タイトル"}/>
-					)}
-				/>
-				<Controller
-					name="latitude"
-					control={control}
-					render={({field}) => (
-						<TextField {...field} disabled={true} label={"緯度"}/>
-					)}
-				/>
-				<Controller
-					name="longitude"
-					control={control}
-					render={({field}) => (
-						<TextField {...field} disabled={true} label={"経度"}/>
-					)}
-				/>
-				<Controller
-					name="description"
-					control={control}
-					render={({field}) => (
-						<TextField {...field} placeholder={"説明"}/>
-					)}
-				/>
-				<div {...getRootProps()}>
-					<input {...getInputProps()} />
-					{
-						isDragActive ?
-							<p>Drop the files here ...</p> :
-							<p>画像を ドロップ または、 クリックして選択</p>
-					}
-				</div>
-				<Button type={"submit"}>追加</Button>
-			</form>
-    </div>
-  )
+			<Box sx={{p:2}}>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<Controller
+						name="title"
+						control={control}
+						render={({field}) => (
+							<TextField {...field} label={"タイトル"}/>
+						)}
+					/>
+					<Controller
+						name="latitude"
+						control={control}
+						render={({field}) => (
+							<TextField {...field} disabled={true} label={"緯度"}/>
+						)}
+					/>
+					<Controller
+						name="longitude"
+						control={control}
+						render={({field}) => (
+							<TextField {...field} disabled={true} label={"経度"}/>
+						)}
+					/>
+					<Controller
+						name="description"
+						control={control}
+						render={({field}) => (
+							<TextField {...field} label={"説明"}/>
+						)}
+					/>
+					<p>{getValues("images")}</p>
+					<div {...getRootProps()}>
+						<input {...getInputProps()} />
+						{
+							isDragActive ?
+								<p>Drop the files here ...</p> :
+								<p>画像を ドロップ または、 クリックして選択</p>
+						}
+					</div>
+					<Button type={"submit"}>{id ? "更新" : "追加"}</Button>
+				</form>
+			</Box>
+		</Box>
+	)
 }
 
 export default Edit;
